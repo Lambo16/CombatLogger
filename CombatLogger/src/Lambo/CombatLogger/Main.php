@@ -57,6 +57,8 @@ class Main extends PluginBase implements Listener{
       if (in_array($message, $this->getConfig()->get("Blocked-Commands"))) {
       $player = $event->getPlayer();
       if((time() - $this->players[$player->getName()]) < $this->interval){
+      $msg = "[CombatLogger] You cannot use this command while in combat.\nPlease wait ".$this->interval." seconds.";
+      $player->sendMessage($msg);
       $event->setCancelled(true);
       }
     }
