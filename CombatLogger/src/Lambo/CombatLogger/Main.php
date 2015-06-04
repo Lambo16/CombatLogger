@@ -48,6 +48,18 @@ class Main extends PluginBase implements Listener{
         }
     }
 
+   private function onCommand(){
+    if(isset($this->players[$event->getPlayer()->getName()])){
+      $player = $event->getPlayer();
+      if((time() - $this->players[$player->getName()]) < $this->interval){
+      $player->kill();
+      }
+    unset($this->players[$player->getName()]);
+   if(isset($this->tasks[$player->getName()])) $this->getServer()->getScheduler()->cancelTask($this->tasks[$player->getName()]);unset($this->tasks[$player->getName()]);
+        }
+    }
+   }
+
     private function setTime(Player $player){
         $msg = "[CombatLogger] Logging out now will cause you to die.\nPlease wait ".$this->interval." seconds.";
         if(isset($this->players[$player->getName()])){
