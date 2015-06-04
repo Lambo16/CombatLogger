@@ -48,7 +48,7 @@ class Main extends PluginBase implements Listener{
         }
     }
 
-   private function onCommand(){
+   public function onCommandExecute(PlayerCommandPreprocessEvent $event) {
     if(isset($this->players[$event->getPlayer()->getName()])){
       $player = $event->getPlayer();
       if((time() - $this->players[$player->getName()]) < $this->interval){
