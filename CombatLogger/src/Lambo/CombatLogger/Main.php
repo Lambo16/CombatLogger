@@ -5,6 +5,7 @@ namespace Lambo\CombatLogger;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\Player;
 use pocketmine\Server;
