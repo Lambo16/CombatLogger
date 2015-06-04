@@ -50,14 +50,15 @@ class Main extends PluginBase implements Listener{
     }
 
    public function onCommandExecute(PlayerCommandPreprocessEvent $event) {
+         $command = $event->getMessage();
+         $commandarray = explode(' ',trim($command));
+         $message = $commandarray[0];
     if(isset($this->players[$event->getPlayer()->getName()])){
+      if (in_array($message, $this->getConfig()->get("Blocked-Commands"))) {
       $player = $event->getPlayer();
       if((time() - $this->players[$player->getName()]) < $this->interval){
-      $player->kill();
+      $event->setCancelled(true);
       }
-    unset($this->players[$player->getName()]);
-   if(isset($this->tasks[$player->getName()])) $this->getServer()->getScheduler()->cancelTask($this->tasks[$player->getName()]);unset($this->tasks[$player->getName()]);
-        }
     }
    }
 
