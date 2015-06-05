@@ -64,6 +64,7 @@ class Main extends PluginBase implements Listener{
       }
     }
    }
+   }
 
     private function setTime(Player $player){
         $msg = "[CombatLogger] Logging out now will cause you to die.\nPlease wait ".$this->interval." seconds.";
