@@ -1,2 +1,5 @@
 # The period of time that a player cannot logout after damaging/getting damaged by another player
-interval: 10
+interval: 10,
+#The Commands that will be blocked while in combat.
+#Include the /
+Blocked-Commands: array("/spawn", "/tpa", "/tp", "/kit")

@@ -5,6 +5,7 @@ namespace Lambo\CombatLogger;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\Player;
 use pocketmine\Server;
@@ -47,6 +48,23 @@ class Main extends PluginBase implements Listener{
             }
         }
     }
+
+   public function onCommandExecute(PlayerCommandPreprocessEvent $event) {
+         $command = $event->getMessage();
+         $commandarray = explode(' ',trim($command));
+         $message = $commandarray[0];
+    if(isset($this->players[$event->getPlayer()->getName()])){
+      if (in_array($message, $this->getConfig()->get("Blocked-Commands"))) {
+      $player = $event->getPlayer();
+      if((time() - $this->players[$player->getName()]) < $this->interval){
+      $countdown = time() - $this->players[$player->getName()];
+      $msg = "[CombatLogger] You cannot use this command while in combat.\nPlease wait ".$countdown." seconds.";
+      $player->sendMessage($msg);
+      $event->setCancelled(true);
+      }
+    }
+   }
+   }
 
     private function setTime(Player $player){
         $msg = "[CombatLogger] Logging out now will cause you to die.\nPlease wait ".$this->interval." seconds.";
