@@ -49,7 +49,7 @@ class Main extends PluginBase implements Listener{
     }
 
     private function setTime(Player $player){
-        $msg = "[CombatLogger] Logging out now will cause you to die.\nPlease wait ".$this->interval." seconds.";
+        $msg = "[MVPELogger] You are now in combat. ".$this->interval." seconds.";
         if(isset($this->players[$player->getName()])){
             if((time() - $this->players[$player->getName()]) > $this->interval){
                 $player->sendMessage($msg);
@@ -112,7 +112,7 @@ class Main extends PluginBase implements Listener{
         $this->seconds++;
         if($this->seconds === $this->interval){
             if($this->player->isOnline()){
-                $this->player->sendMessage("[CombatLogger] You can now log out.");
+                $this->player->sendMessage("[MVPELogger] You are not logger in comabt.");
                 $this->plugin->getServer()->getScheduler()->cancelTask($this->getTaskId());
                 unset($this->plugin->tasks[$player->getName()]);
             }
