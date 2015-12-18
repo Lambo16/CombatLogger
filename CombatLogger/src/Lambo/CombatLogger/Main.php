@@ -13,6 +13,7 @@ use pocketmine\event\Event;
 use pocketmine\event\EventPriority;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\scheduler\PluginTask;
 
 class Main extends PluginBase implements Listener{
@@ -95,6 +96,14 @@ class Main extends PluginBase implements Listener{
         }
     }
 }
+    public function onVoidLoop(PlayerMoveEvent $event){
+        if($event->getTo()->getFloorY() < 5){
+            $player = $event->getPlayer();
+            if((time() - $this->players[$player->getName()]) < $this->interval){
+$player->setHealth($player->getHealth() - ($player->getHealth()));
+            }
+        }
+    }
 /*class TimeMsg extends PluginTask{
 
     private $seconds = 0;
