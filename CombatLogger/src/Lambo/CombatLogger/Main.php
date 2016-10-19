@@ -20,6 +20,7 @@ class Main extends PluginBase implements Listener{
     private $players = array();
     public $tasks = array();
     public $interval = 10;
+    public $isrestarting = [];
 
     public function onEnable(){
         $this->saveDefaultConfig();
