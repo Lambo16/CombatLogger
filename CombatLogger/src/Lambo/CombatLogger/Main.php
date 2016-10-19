@@ -14,6 +14,7 @@ use pocketmine\event\EventPriority;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\scheduler\PluginTask;
+use pocketmine\event\player\PlayerKickEvent;
 
 class Main extends PluginBase implements Listener{
 
@@ -76,6 +77,12 @@ class Main extends PluginBase implements Listener{
             unset($this->players[$event->getEntity()->getName()]);
             if(isset($this->tasks[$event->getEntity()->getName()])) $this->getServer()->getScheduler()->cancelTask($this->tasks[$event->getEntity()->getName()]);unset($this->tasks[$event->getEntity()->getName()]);
         }
+    }
+
+    public function onKick(PlayerKickEvent $event){
+       if(isset($this->players[$event->getPlayer()->getName()])){
+        unset($this->players[$event->getPlayer()->getName()]);
+            if(isset($this->tasks[$event->getEntity()->getName()])) $this->getServer()->getScheduler()->cancelTask($this->tasks[$event->getEntity()->getName()]);unset($this->tasks[$event->getEntity()->getName()]);
     }
 
     /**
