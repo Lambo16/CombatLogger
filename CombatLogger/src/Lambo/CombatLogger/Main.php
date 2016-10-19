@@ -82,6 +82,7 @@ class Main extends PluginBase implements Listener{
     public function onKick(PlayerKickEvent $event){
        if(isset($this->players[$event->getPlayer()->getName()])){
         unset($this->players[$event->getPlayer()->getName()]);
+            if(isset($this->tasks[$event->getEntity()->getName()])) $this->getServer()->getScheduler()->cancelTask($this->tasks[$event->getEntity()->getName()]);unset($this->tasks[$event->getEntity()->getName()]);
     }
 
     /**
